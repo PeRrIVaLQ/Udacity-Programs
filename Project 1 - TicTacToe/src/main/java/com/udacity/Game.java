@@ -150,23 +150,8 @@ public class Game {
      */
     public String checkGameWinner(char [][]grid){
         String result = "None";
-        //Student code goes here ...
-        return result;
-    }
-
-    /**
-     * Main function
-     * @param args command line arguments
-     */
-    public static void main(String args[]){
-        Game game = new Game();
-        gui = new GameUI(game);
-    }
-
-    public String checkGameWinner(char [][]grid) {
-        String result = "None";
-        Character[] symbol = {'x', 'o'};
-        String[] message = {"X wins", "O wins"};
+        Character[] symbol = {'x','o'};
+        String [] message = {"X wins", "O wins"};
 
         for(int j=0;j<symbol.length;j++) {
 
@@ -187,6 +172,29 @@ public class Game {
             }
 
         }
+        // Check for tie
+        int total = 0;
+        for(int i=0;i<grid.length;i++) {
+            for(int j=0;j<grid.length;j++) {
+                if(!(grid[i][j] == '-'))
+                    total += 1;
+            }
+        }
+        if(total == grid.length * grid.length)
+            return "Tie";
+
+
+        return result;
+    }
+    /**
+     * Main function
+     * @param args command line arguments
+     */
+    public static void main(String args[]){
+        Game game = new Game();
+        gui = new GameUI(game);
     }
 
-}
+
+    }
+
