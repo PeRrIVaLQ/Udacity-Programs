@@ -15,7 +15,7 @@ public class Simulation {
             String[] parts = line.split(",");
             items.add(new Item(parts[0], Integer.parseInt(parts[1])));
         }
-        scanner.close(); // Properly close the scanner
+        scanner.close();
         return items;
     }
 
@@ -23,19 +23,18 @@ public class Simulation {
         ArrayList<Rocket> rockets = new ArrayList<>();
 
         for (Item item : items) {
-            Rocket rocket = new U1(); // Create a new U1 rocket for each item
+            Rocket rocket = new U1();
             while (!rocket.canCarry(item)) {
-                rockets.add(rocket); // Add full rocket to the fleet
-                rocket = new U1(); // Create a new U1 rocket
+                rockets.add(rocket);
+                rocket = new U1();
             }
-            rocket.carry(item); // Carry the item
-            rockets.add(rocket); // Add the rocket to the fleet
+            rocket.carry(item);
+            rockets.add(rocket);
         }
 
         return rockets;
     }
 
-// Similarly update the loadU2 method in the same way
 
     public ArrayList<Rocket> loadU2(ArrayList<Item> items) {
         ArrayList<Rocket> rockets = new ArrayList<>();
@@ -53,7 +52,6 @@ public class Simulation {
         return rockets;
     }
 
-// Similarly update the loadU2 method in the same way
 
     public long runSimulation(ArrayList<Rocket> rockets) {
         long totalBudget = 0;

@@ -5,7 +5,7 @@ public class Rocket implements SpaceShip {
 
     public Rocket(int weight, int cost) {
         currentWeight = weight;
-        maxWeight = weight; // This should later be updated to include cargo weight if necessary
+        maxWeight = weight;
         this.cost = cost;
     }
 
