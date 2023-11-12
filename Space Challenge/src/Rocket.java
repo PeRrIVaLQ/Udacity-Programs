@@ -1,15 +1,24 @@
 public class Rocket implements SpaceShip {
     int currentWeight;
     int maxWeight;
+    double cost;
+
+    public Rocket(int weight, int cost) {
+        currentWeight = weight;
+        maxWeight = weight; // This should later be updated to include cargo weight if necessary
+        this.cost = cost;
+    }
 
     public boolean launch() {
-        // Implementation based on rocket specifications
-        return true;
+
+        double launchExplosionProbability = 0.05 * (currentWeight / (double)maxWeight);
+        return Math.random() >= launchExplosionProbability;
     }
 
     public boolean land() {
-        // Implementation based on rocket specifications
-        return true;
+
+        double landingCrashProbability = 0.01 * (currentWeight / (double)maxWeight);
+        return Math.random() >= landingCrashProbability;
     }
 
     public boolean canCarry(Item item) {
@@ -19,4 +28,9 @@ public class Rocket implements SpaceShip {
     public void carry(Item item) {
         currentWeight += item.weight;
     }
+
+    public double getCost() {
+        return this.cost;
+    }
+
 }

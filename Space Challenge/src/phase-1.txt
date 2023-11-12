@@ -1,0 +1,5 @@
+hammer,130
+laptop,2400
+food,1500
+steel,3000
+copper wire,1000

@@ -1,0 +1,5 @@
+water,5000
+shelter,10000
+solar panel,5000
+food,2000
+generator,5000

@@ -12,12 +12,65 @@ public class Simulation {
 
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            String[] parts = line.split("=");
+            String[] parts = line.split(",");
             items.add(new Item(parts[0], Integer.parseInt(parts[1])));
         }
         scanner.close(); // Properly close the scanner
         return items;
     }
 
-    // Implement other methods as described in the mission specs...
+    public ArrayList<Rocket> loadU1(ArrayList<Item> items) {
+        ArrayList<Rocket> rockets = new ArrayList<>();
+
+        for (Item item : items) {
+            Rocket rocket = new U1(); // Create a new U1 rocket for each item
+            while (!rocket.canCarry(item)) {
+                rockets.add(rocket); // Add full rocket to the fleet
+                rocket = new U1(); // Create a new U1 rocket
+            }
+            rocket.carry(item); // Carry the item
+            rockets.add(rocket); // Add the rocket to the fleet
+        }
+
+        return rockets;
+    }
+
+// Similarly update the loadU2 method in the same way
+
+    public ArrayList<Rocket> loadU2(ArrayList<Item> items) {
+        ArrayList<Rocket> rockets = new ArrayList<>();
+
+        for (Item item : items) {
+            Rocket rocket = new U2(); // Create a new U1 rocket for each item
+            while (!rocket.canCarry(item)) {
+                rockets.add(rocket); // Add full rocket to the fleet
+                rocket = new U2(); // Create a new U1 rocket
+            }
+            rocket.carry(item); // Carry the item
+            rockets.add(rocket); // Add the rocket to the fleet
+        }
+
+        return rockets;
+    }
+
+// Similarly update the loadU2 method in the same way
+
+    public long runSimulation(ArrayList<Rocket> rockets) {
+        long totalBudget = 0;
+        for (Rocket rocket : rockets) {
+            System.out.println("Launching rocket...");
+            boolean launchSuccess = rocket.launch();
+            boolean landSuccess = rocket.land();
+
+            if (!(launchSuccess && landSuccess)) {
+                totalBudget += rocket.getCost();
+                System.out.println("Rocket failed to launch or land. New rocket created. Cost: " + rocket.getCost());
+                totalBudget += rocket.getCost(); // Add cost of the new rocket
+            } else {
+                System.out.println("Rocket successfully launched and landed.");
+            }
+        }
+        return totalBudget;
+    }
+
 }
