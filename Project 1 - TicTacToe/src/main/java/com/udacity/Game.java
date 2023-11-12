@@ -163,7 +163,11 @@ public class Game {
         gui = new GameUI(game);
     }
 
-    public String CheckGameWinner(char [][]grid){
+    public String checkGameWinner(char [][]grid) {
+        String result = "None";
+        Character[] symbol = {'x', 'o'};
+        String[] message = {"X wins", "O wins"};
+
     }
 
 }
