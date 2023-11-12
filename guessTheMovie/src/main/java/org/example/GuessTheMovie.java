@@ -36,6 +36,8 @@ public class GuessTheMovie {
         Scanner scanner = new Scanner(System.in);
         String chosenMovie = pickRandomMovie();
         String hiddenTitle = hideMovieTitle(chosenMovie);
+        String guessedLetters = "";
+
         System.out.println("Zgadnij film: " + hiddenTitle);
 
         int wrongGuesses = 0;
@@ -45,21 +47,40 @@ public class GuessTheMovie {
             System.out.print("Twoja litera: ");
             String guess = scanner.nextLine().toLowerCase();
 
-            if (guess.length() == 1 && chosenMovie.toLowerCase().contains(guess)) {
+            if (guessedLetters.contains(guess)) {
+                System.out.println("Tę literę już podałeś!");
+                continue;
+            }
+
+            guessedLetters += guess;
+
+            if (chosenMovie.toLowerCase().contains(guess)) {
                 System.out.println("Dobrze! Litera istnieje.");
-                // Logika odkrywania liter
+                hiddenTitle = updateHiddenTitle(chosenMovie, hiddenTitle, guess);
+                System.out.println("Zgadnij film: " + hiddenTitle);
             } else {
                 wrongGuesses++;
                 System.out.println("Nieprawidłowa litera. Pozostało prób: " + (10 - wrongGuesses));
             }
 
-            // Logika sprawdzania, czy użytkownik zgadł wszystkie litery
+            hasWon = !hiddenTitle.contains("_");
         }
 
         if (hasWon) {
-            System.out.println("Wygrałeś!");
+            System.out.println("Wygrałeś! Film to: " + chosenMovie);
         } else {
             System.out.println("Przegrałeś. Film to: " + chosenMovie);
         }
+    }
+
+        // Metoda aktualizująca ukryty tytuł filmu odkrywając poprawnie zgadnięte litery
+    public static String updateHiddenTitle(String movie, String hiddenTitle, String guess) {
+        StringBuilder newHiddenTitle = new StringBuilder(hiddenTitle);
+        for (int i = 0; i < movie.length(); i++) {
+            if (movie.toLowerCase().charAt(i) == guess.charAt(0)) {
+                newHiddenTitle.setCharAt(i, movie.charAt(i));
+            }
+        }
+        return newHiddenTitle.toString();
     }
 }
