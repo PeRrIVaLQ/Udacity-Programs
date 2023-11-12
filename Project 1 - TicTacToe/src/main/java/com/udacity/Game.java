@@ -168,6 +168,25 @@ public class Game {
         Character[] symbol = {'x', 'o'};
         String[] message = {"X wins", "O wins"};
 
+        for(int j=0;j<symbol.length;j++) {
+
+            // Check for diagonal
+            if (grid[0][0] == symbol[j] && grid[1][1] == symbol[j] && grid[2][2] == symbol[j])
+                return message[j];
+            if (grid[0][2] == symbol[j] && grid[1][1] == symbol[j] && grid[2][0] == symbol[j])
+                return message[j];
+
+            for(int i=0;i<grid.length;i++) {
+                // Check for rows
+                if (grid[0][i] == symbol[j] && grid[1][i] == symbol[j] && grid[2][i] == symbol[j])
+                    return message[j];
+
+                // Check for columns
+                if (grid[i][0] == symbol[j] && grid[i][1] == symbol[j] && grid[i][2] == symbol[j])
+                    return message[j];
+            }
+
+        }
     }
 
 }
